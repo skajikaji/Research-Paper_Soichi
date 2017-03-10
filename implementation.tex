@@ -1,0 +1,55 @@
+\section{Implementation}\label{Sec:Implementation}
+
+Show the implementation. The goal of this section is to show and explain the most important parts of the code. Listing the code with highlighting and possibly line numbering is essential.
+Explain the code by referring to line numbers, function calls and variable names.
+Leave out trivial parts (initialization, parameter-tuning, etc...).
+\begin{itemize}
+	\item PLM
+	\item CLSE
+	\item Stargazer
+	\item Figure
+	
+	\begin{itemize}
+		\item F1
+	\end{itemize}
+	\\
+	\begin{lstlisting}
+	library(maptools)
+	
+	pointLabel(x=F1_revise$lrgdpch,y=F1_revise$fhpolrigaug,labels=F1_revise$code,col="black")
+	\end{lstlisting}
+	\\
+	\\
+	
+	We handle around 150 data in a figure and if we just plot by "text" command, we cannot distinguish each label. Therefore, we introduce "maptools" package for the figure in order to fix place of each label automatically to be able to recognize each one. "pointLabel" is a command to function automatically adjustment of "maptools" package. We need same texts to call "pointLabel" command with "text" command which uses to change labels form dots to specific names. 
+	\\
+	\\
+	
+	\begin{itemize}
+		\item F5
+	\end{itemize}
+	\\
+	\\
+	
+	\begin{lstlisting}
+	x<-1945
+	for (i in 1:11) {
+	x<-x+5
+	plot(fhpolrigaug~lrgdpch,data=X5yr_panel, subset=year==x,
+	xlim=c(6,10),ylim=c(0,1),ann=F, xaxt="n",yaxt="n")  #setting for length of graph by xlim and ylim, and erase whole title and axis by ann=F
+	text(6.3,0.95,x, cex=1.5)              #label setting for each graph
+	if (i %in% c (8:11) ) { axis (1 , col = " black ", col.axis= " black ", at = seq (6 , 10 , 2) ) }
+	if (i %in% c(1 , 5 , 9) ) { axis (2 , col = " black ", col.axis = " black ", at = seq (0 , 1 , 0.5) ) }
+	result<-lm(formula=fhpolrigaug~lrgdpch, data=X5yr_panel, subset=year==x)
+	abline(result, col="blue")
+	box(col = "grey60")
+	}
+	\end{lstlisting}
+	
+	\\
+	
+	\\
+	
+	Figure5 shows each year panel data in each separate graph. Since we should make 11 figures and avoid to use same command for 11 times, we use "for" command to iterate same command for 11 times. We introduce a variable "x" in the command to refer each year data.  Variable "x" is added 5 for each repeat and through this, the command can refer same number of year data with "x" from data set. Also, we add "if" command to add tick mark to 1st, 5th, and 9th graph in vertical axis and 8th to 11th in horizontal axis. Through this command, "axis" command function in typical number of variable "i" which means number of iterate.
+	
+\end{itemize}
